@@ -1,3 +1,9 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .wrapper {
   padding: 0 1rem;
 }
@@ -39,12 +45,12 @@ nav > ul {
   justify-content: center;
   color: white;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 
 nav > ul li {
   list-style: none;
-  background-color: rgb(40, 40, 40);
+  background-color: rgba(0, 0, 0, 0.697);
   padding: .5rem;
   cursor: pointer;
 }
@@ -53,16 +59,21 @@ nav > ul li:hover {
  text-decoration: underline;
 }
 
+/* Main section styles*/
+
 main {
   background-color: #8ab2c7;
+  flex: 1;
 }
+
+/* Favorite list styles*/
 
 .favorites-wrapper {
   position: relative;
-  top: -25px;
+  top: -35px;
   height: 41rem;
   background-color: #9e6f50;
-  max-width: 35rem;
+  max-width: 25rem;
   padding: 2rem;
   color: white;
   border-radius: 1rem;
@@ -114,4 +125,88 @@ main {
 .favorites-wrapper > ul::-webkit-scrollbar-thumb {
   background-color: rgb(60, 60, 60);
   border-radius: 20px;
+}
+
+/* Form styles*/
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-bottom: 2rem;
+}
+.form-container h2 {
+  font-size: 1.8rem;
+}
+
+form label, p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  margin: 1rem 0;
+}
+
+form > div > .input-container, .radio-input div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+form input {
+  height: 2.2rem;
+  max-width: 25rem;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: .5rem;
+}
+
+.radio-input > p {
+  margin: 1rem 0;
+}
+
+form input[type="radio"] {
+  height: 20px;
+  width: 20px;
+}
+
+.small {
+  width: 12.5rem;
+}
+
+form > button {
+  padding: .5rem;
+  background-color: #263e4c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  section {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .wrapper {
+    max-width: 980px;
+    margin: auto;
+  }
+
+  nav > ul {
+    justify-content: flex-end;
+  }
+.form-container {
+  margin: 2rem 0;
+}
+
+  form input, .favorites-wrapper {
+    width: 30rem;
+  }
 }
