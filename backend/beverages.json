@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "1dfe09a1-c5c8-4975-a6b4-3a401dadd8ff",
+    "name": "Brazilian bold",
+    "weight": "20.3",
+    "price": 4.5,
+    "roastLevel": 3
+  },
+  {
+    "id": "41afe61a-cd1c-4e32-973b-f6279da53cee",
+    "name": "French bold",
+    "weight": "40,5",
+    "price": 14,
+    "roastLevel": 5
+  }
+]

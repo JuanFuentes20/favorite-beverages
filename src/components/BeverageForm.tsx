@@ -1,17 +1,43 @@
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, SetStateAction } from 'react';
+import { useMutation } from 'react-query';
+import {v4 as uuidv4} from 'uuid';
+
 
 type Beverage = {
+    id: string;
     name: string;
     weight: string;
     price: number;
     roastLevel: number;
 };
 
-export default function BeverageForm() {
+
+type BeverageFormProps = {
+  setBeverages: React.Dispatch<SetStateAction<Beverage[]>>;
+};
+
+export default function BeverageForm({setBeverages} : BeverageFormProps) {
     const [name, setName] = useState('');
     const [weight, setWeight] = useState('');
     const [price, setPrice] = useState(0);
     const [roastLevel, setRoastLevel] = useState(1);
+
+    const mutation = useMutation({
+        mutationFn: async (newBeverage: Beverage) => {
+          const response = await fetch('http://localhost:5000/api/beverages', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newBeverage)
+          });
+          return response.json();
+        },
+        onSuccess: (data: Beverage) => {
+          setBeverages(prev => [...prev, data])
+        }
+      });
+      
 
     const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -33,8 +59,8 @@ export default function BeverageForm() {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        const newBeverage: Beverage = { name, weight, price, roastLevel };
-        console.log(newBeverage)
+        const newBeverage: Beverage = {id: uuidv4(), name, weight, price, roastLevel };
+        mutation.mutate(newBeverage)
         setName('');
         setWeight('');
         setPrice(0);
@@ -47,19 +73,19 @@ export default function BeverageForm() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input type="text" name="name" id="name" value={name} onChange={handleNameChange} />
+                    <input required type="text" name="name" id="name" value={name} onChange={handleNameChange} />
                 </div>
                 <div>
                     <label htmlFor="weight">Package weight</label>
                     <div className="input-container">
-                        <input className="small" type="text" name="weight" id="weight" value={weight} onChange={handleWeightChange} />
+                        <input required className="small" type="text" name="weight" id="weight" value={weight} onChange={handleWeightChange} />
                         <p>g</p>
                     </div>
                 </div>
                 <div>
                     <label htmlFor="price">Price</label>
                     <div className="input-container">
-                        <input className="small" type="number" name="price" id="price" value={isNaN(price) ? '' : price} onChange={handlePriceChange} />
+                        <input required className="small" type="number" name="price" id="price" value={isNaN(price) ? '' : price} onChange={handlePriceChange} />
                         <p>€</p>
                     </div>
                 </div>
