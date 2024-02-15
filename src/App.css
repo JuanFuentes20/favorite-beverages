@@ -58,6 +58,60 @@ main {
 }
 
 .favorites-wrapper {
+  position: relative;
+  top: -25px;
+  height: 41rem;
   background-color: #9e6f50;
   max-width: 35rem;
+  padding: 2rem;
+  color: white;
+  border-radius: 1rem;
+}
+
+.favorites-wrapper h2 {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.favorites-wrapper p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.favorites-wrapper > ul {
+  max-height: 30rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.favorites-wrapper > ul li {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+
+.see-all {
+  margin-top: 2rem;
+  margin-left: 3.5rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.see-all:hover {
+  text-decoration-color: black;
+}
+
+.favorites-wrapper > ul::-webkit-scrollbar {
+  width: 4px;
+}
+
+.favorites-wrapper > ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.favorites-wrapper > ul::-webkit-scrollbar-thumb {
+  background-color: rgb(60, 60, 60);
+  border-radius: 20px;
 }
