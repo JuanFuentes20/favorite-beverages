@@ -3,13 +3,19 @@ import Header from './components/Header';
 import FavoriteList from './components/FavoriteList';
 import BeverageForm from './components/BeverageForm';
 import { useQuery } from 'react-query'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+
+enum BeverageType {
+  Coffee,
+  Tea
+}
 
 type Beverage = {
-  id: string,
+  id: string;
+  type: BeverageType;
   name: string;
-  weight: string;
+  weight: number;
   price: number;
   roastLevel: number;
 };
@@ -18,6 +24,19 @@ type Beverage = {
 function App() {
 
   const [beverages, setBeverages] = useState<Beverage[]>([])
+  const [filteredBeverages, setFilteredBeverages] = useState<Beverage[]>([])
+  const [page, setPage] = useState<0 | 1 | 2>(0)
+
+  useEffect(() => {
+    if(beverages.length > 0){
+      const beveragesByPage = beverages.filter(beverage => {
+        if(page === 2) return beverage
+        return beverage.type === page 
+      })
+      setFilteredBeverages(beveragesByPage)
+    }
+    
+  }, [page, beverages])
 
   const fetchBeverages = async () => {
     const response = await fetch('http://localhost:5000/api/beverages')
@@ -38,10 +57,10 @@ function App() {
 
   return (
       <div className="App">
-      <Header />
+      <Header page={page} setPage={setPage}/>
       <main>
         <section className='wrapper'>
-          <FavoriteList beverages={beverages} status={status}/>
+          <FavoriteList page={page} beverages={filteredBeverages} status={status}/>
           <BeverageForm setBeverages={setBeverages}/>
         </section>
       </main>

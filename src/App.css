@@ -73,7 +73,6 @@ main {
   top: -35px;
   height: 41rem;
   background-color: #9e6f50;
-  max-width: 25rem;
   padding: 2rem;
   color: white;
   border-radius: 1rem;
@@ -93,7 +92,7 @@ main {
   max-height: 30rem;
   overflow: auto;
   display: flex;
-  flex-direction: column;
+  flex-flow: wrap;
   gap: 2rem;
 }
 

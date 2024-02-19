@@ -1,16 +1,50 @@
 [
   {
-    "id": "1dfe09a1-c5c8-4975-a6b4-3a401dadd8ff",
+    "id": "afe2b7e3-5948-43a4-8f46-f395a005ef82",
+    "type": 0,
     "name": "Brazilian bold",
-    "weight": "20.3",
-    "price": 4.5,
+    "weight": 20.3,
+    "price": 12.5,
+    "roastLevel": 1
+  },
+  {
+    "id": "037618a2-72c0-4e15-b5a5-fb5af05b7e06",
+    "type": 1,
+    "name": "Earl Grey",
+    "weight": 100,
+    "price": 4,
+    "roastLevel": 1
+  },
+  {
+    "id": "754b5e09-56d3-453e-b116-0b00a53bf8fe",
+    "type": 0,
+    "name": "French bold",
+    "weight": 250,
+    "price": 13.5,
+    "roastLevel": 5
+  },
+  {
+    "id": "9cbf82ba-1ded-4e64-a1df-68066630731d",
+    "type": 1,
+    "name": "Lipton",
+    "weight": 300,
+    "price": 7,
     "roastLevel": 3
   },
   {
-    "id": "41afe61a-cd1c-4e32-973b-f6279da53cee",
-    "name": "French bold",
-    "weight": "40,5",
-    "price": 14,
-    "roastLevel": 5
+    "id": "74ace839-c9da-4ba2-a6c8-5340df87cf38",
+    "type": 0,
+    "name": "Cafe creme",
+    "weight": 40,
+    "price": 6,
+    "roastLevel": 1
+  },
+  {
+    "id": "297d6887-0827-4481-bce4-7f1b59179a51",
+    "type": 0,
+    "name": "Espresso shot",
+    "weight": 11,
+    "price": 2.7,
+    "roastLevel": 4
   }
 ]

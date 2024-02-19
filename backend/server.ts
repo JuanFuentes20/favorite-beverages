@@ -8,9 +8,16 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 
 // Types
+enum BeverageType {
+    Coffee,
+    Tea
+}
+
 type Beverage = {
+    id: string;
+    type: BeverageType;
     name: string;
-    weight: string;
+    weight: number;
     price: number;
     roastLevel: 1 | 2 | 3 | 4 | 5;
 };

@@ -1,24 +1,40 @@
-import { useState, FormEvent, ChangeEvent, SetStateAction } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import { useMutation } from 'react-query';
 import {v4 as uuidv4} from 'uuid';
 
 
-type Beverage = {
+enum BeverageType {
+    Coffee,
+    Tea
+  }
+
+enum RoastLevel {
+    LightRoast = 1,
+    MediumRoast,
+    DarkRoast,
+    EspressoRoast,
+    FrenchRoast
+}
+  
+  type Beverage = {
     id: string;
+    type: BeverageType;
     name: string;
-    weight: string;
+    weight: number;
     price: number;
-    roastLevel: number;
-};
+    roastLevel: RoastLevel;
+  };
+  
 
 
 type BeverageFormProps = {
-  setBeverages: React.Dispatch<SetStateAction<Beverage[]>>;
+  setBeverages: React.Dispatch<React.SetStateAction<Beverage[]>>;
 };
 
 export default function BeverageForm({setBeverages} : BeverageFormProps) {
+    const [type, setType] = useState(0)
     const [name, setName] = useState('');
-    const [weight, setWeight] = useState('');
+    const [weight, setWeight] = useState(0);
     const [price, setPrice] = useState(0);
     const [roastLevel, setRoastLevel] = useState(1);
 
@@ -39,12 +55,18 @@ export default function BeverageForm({setBeverages} : BeverageFormProps) {
       });
       
 
+    const handleBeverageTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const beverageType = parseInt(e.target.value, 10);
+        setType(beverageType);
+    };
+
     const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
     };
 
     const handleWeightChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setWeight(e.target.value);
+        const weigthValue = parseFloat(e.target.value);
+        setWeight(weigthValue);
     };
 
     const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,16 +75,17 @@ export default function BeverageForm({setBeverages} : BeverageFormProps) {
     };
 
     const handleRoastLevelChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const roastLevel = parseFloat(e.target.value);
+        const roastLevel = parseInt(e.target.value, 10);
         setRoastLevel(roastLevel);
     };
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        const newBeverage: Beverage = {id: uuidv4(), name, weight, price, roastLevel };
+        const newBeverage: Beverage = {id: uuidv4(), type, name, weight, price, roastLevel };
         mutation.mutate(newBeverage)
+        setType(0)
         setName('');
-        setWeight('');
+        setWeight(0);
         setPrice(0);
         setRoastLevel(1);
     };
@@ -71,6 +94,17 @@ export default function BeverageForm({setBeverages} : BeverageFormProps) {
         <div className="form-container">
             <h2>Add new</h2>
             <form onSubmit={handleSubmit}>
+            <div className="radio-input">
+                    <p>Type of beverage</p>
+                    <div>
+                        <input type="radio" id="coffee" name="coffee" value="0" checked={type === 0} onChange={handleBeverageTypeChange} />
+                        <label htmlFor="coffee">Coffee</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="tea" name="tea" value="1" checked={type === 1} onChange={handleBeverageTypeChange} />
+                        <label htmlFor="tea">Tea</label>
+                    </div>
+                </div>
                 <div>
                     <label htmlFor="name">Name</label>
                     <input required type="text" name="name" id="name" value={name} onChange={handleNameChange} />
@@ -78,7 +112,7 @@ export default function BeverageForm({setBeverages} : BeverageFormProps) {
                 <div>
                     <label htmlFor="weight">Package weight</label>
                     <div className="input-container">
-                        <input required className="small" type="text" name="weight" id="weight" value={weight} onChange={handleWeightChange} />
+                        <input required className="small" type="number" name="weight" id="weight" value={isNaN(weight) ? '' : weight} onChange={handleWeightChange} />
                         <p>g</p>
                     </div>
                 </div>
@@ -112,7 +146,7 @@ export default function BeverageForm({setBeverages} : BeverageFormProps) {
                         <label htmlFor="french">French roast</label>
                     </div>
                 </div>
-                <button type="submit">Save</button>
+                <button type="submit" style={{opacity: mutation.isLoading ? '0.6' : '1', cursor: mutation.isLoading ? 'not-allowed' : 'initial'}}>Save</button>
             </form>
         </div>
     );
