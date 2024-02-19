@@ -46,5 +46,13 @@
     "weight": 11,
     "price": 2.7,
     "roastLevel": 4
+  },
+  {
+    "id": "7c108f3a-db0a-42b7-bb92-3965a48cd157",
+    "type": 0,
+    "name": "Kulta Katriina",
+    "weight": 20.5,
+    "price": 6.3,
+    "roastLevel": 3
   }
 ]

@@ -4,21 +4,8 @@ import FavoriteList from './components/FavoriteList';
 import BeverageForm from './components/BeverageForm';
 import { useQuery } from 'react-query'
 import { useState, useEffect } from 'react';
+import { Beverage } from './types/Beverage';
 
-
-enum BeverageType {
-  Coffee,
-  Tea
-}
-
-type Beverage = {
-  id: string;
-  type: BeverageType;
-  name: string;
-  weight: number;
-  price: number;
-  roastLevel: number;
-};
 
 
 function App() {

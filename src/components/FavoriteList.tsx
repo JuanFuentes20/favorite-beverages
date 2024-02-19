@@ -1,18 +1,6 @@
 import { useState } from "react"
+import { Beverage } from '../types/Beverage';
 
-enum BeverageType {
-  Coffee,
-  Tea
-}
-
-type Beverage = {
-  id: string;
-  type: BeverageType;
-  name: string;
-  weight: number;
-  price: number;
-  roastLevel: number;
-};
 export default function FavoriteList({ page, beverages, status }: { page: Number, beverages?: Beverage[], status: string }) {
     const numberOfItemsToShow = 5;
     const [visible, setVisible] = useState(numberOfItemsToShow);
@@ -37,7 +25,7 @@ export default function FavoriteList({ page, beverages, status }: { page: Number
           </ul>
         ) : (status === 'loading') ? <p>Loading...</p> : <p>No beverages saved</p>}
   
-        {(beverages && visible <= beverages.length + 1) ? <p className="see-all" onClick={() => setVisible(prev => prev + 3)}>See all</p> : null}
+        {(beverages && visible < beverages.length + 1) ? <p className="see-all" onClick={() => setVisible(prev => prev + 3)}>See all</p> : null}
       </div>
     );
   }

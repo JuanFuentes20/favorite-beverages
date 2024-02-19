@@ -1,29 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { useMutation } from 'react-query';
 import {v4 as uuidv4} from 'uuid';
-
-
-enum BeverageType {
-    Coffee,
-    Tea
-  }
-
-enum RoastLevel {
-    LightRoast = 1,
-    MediumRoast,
-    DarkRoast,
-    EspressoRoast,
-    FrenchRoast
-}
-  
-  type Beverage = {
-    id: string;
-    type: BeverageType;
-    name: string;
-    weight: number;
-    price: number;
-    roastLevel: RoastLevel;
-  };
+import { Beverage, RoastLevel, BeverageType } from '../types/Beverage';
   
 
 
@@ -32,11 +10,11 @@ type BeverageFormProps = {
 };
 
 export default function BeverageForm({setBeverages} : BeverageFormProps) {
-    const [type, setType] = useState(0)
+    const [type, setType] = useState<BeverageType>(0)
     const [name, setName] = useState('');
     const [weight, setWeight] = useState(0);
     const [price, setPrice] = useState(0);
-    const [roastLevel, setRoastLevel] = useState(1);
+    const [roastLevel, setRoastLevel] = useState<RoastLevel>(1);
 
     const mutation = useMutation({
         mutationFn: async (newBeverage: Beverage) => {
@@ -56,7 +34,7 @@ export default function BeverageForm({setBeverages} : BeverageFormProps) {
       
 
     const handleBeverageTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const beverageType = parseInt(e.target.value, 10);
+        const beverageType: BeverageType = parseInt(e.target.value, 10);
         setType(beverageType);
     };
 
@@ -75,7 +53,7 @@ export default function BeverageForm({setBeverages} : BeverageFormProps) {
     };
 
     const handleRoastLevelChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const roastLevel = parseInt(e.target.value, 10);
+        const roastLevel: RoastLevel = parseInt(e.target.value, 10);
         setRoastLevel(roastLevel);
     };
 
